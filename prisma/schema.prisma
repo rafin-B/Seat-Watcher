@@ -1,0 +1,23 @@
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model WatchItem {
+  id         String   @id @default(cuid())
+  userEmail  String
+  course     String
+  section    String
+  faculty    String?
+  minFree    Int      @default(1)
+  lastFree   Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userEmail])
+}
